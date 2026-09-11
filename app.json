@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "Location Demo",
+    "slug": "location-demo",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "userInterfaceStyle": "automatic",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.example.locationdemo",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Location Demo uses your location to find nearby places.",
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "com.example.locationdemo",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundColor": "#FDF6EA"
+      },
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION"
+      ]
+    },
+    "splash": {
+      "image": "./assets/images/icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FDF6EA"
+    },
+    "plugins": [],
+    "web": {
+      "favicon": "./assets/images/icon.png"
+    },
+    "description": "A location-aware demo for exploring nearby places."
+  }
+}

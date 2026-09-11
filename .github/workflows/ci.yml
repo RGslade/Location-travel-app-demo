@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Typecheck, lint and tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm validate
+      - run: pnpm exec expo config --type public --json > expo-config.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expo-config
+          path: expo-config.json
+
+  dependency-review:
+    name: Dependency review
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/dependency-review-action@v4

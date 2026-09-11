@@ -1,0 +1,10 @@
+node_modules/
+.pnpm-store/
+.expo/
+.expo-shared/
+.env*
+.dev.vars
+.wrangler/
+credentials/
+*.jks
+.codeveloper/
